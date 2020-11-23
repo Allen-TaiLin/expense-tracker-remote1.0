@@ -7,14 +7,24 @@ const categoryList = require('../../category.json')
 
 // 新增種子資料
 db.once('open', () => {
+  console.log('MongoDB connected category!')
+
+  const promise = []
   for (let i = 0; i < categoryList.length; i++) {
-    Category.create({
-      category: categoryList[i].categoryList,
-      icon: categoryList[i].icon,
-      orderByID: categoryList[i].orderByID
-    })
+    promise.push(
+      Category.create({
+        category: categoryList[i].category,
+        icon: categoryList[i].icon,
+        orderByID: categoryList[i].orderByID
+      })
+    )
+
   }
 
+  // 資料建立後，中斷連線換手
+  Promise.all(promise).then(() => {
+    db.close()
+  })
   // 資料建立成功
   console.log('Category Data Insert Done')
 })
