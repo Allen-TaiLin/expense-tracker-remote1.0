@@ -14,6 +14,8 @@ db.once('open', () => {
     promise.push(
       Category.create({
         category: categoryList[i].category,
+        categoryName: categoryList[i].categoryName,
+        url: categoryList[i].url,
         icon: categoryList[i].icon,
         orderByID: categoryList[i].orderByID
       })

@@ -9,9 +9,8 @@ const recordSchema = new Schema({
     required: true  // 這是個必填欄位
   },
   date: {
-    type: Date,  // 資料型別是日期
-    required: true,  // 這是個必填欄位
-    default: Date.now  // 欄位預設值
+    type: String,  // 資料型別是字串
+    required: true,  // 這是個必填欄位    
   },
   category: {
     type: String,
