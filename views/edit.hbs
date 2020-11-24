@@ -18,7 +18,7 @@
             <h3>消費名稱<span>*</span> : </h3>
           </div>
           <div class="col-5">
-            <input type="text" class="form-control" name="name" value="{{ test }}" required>
+            <input type="text" class="form-control" name="name" value="{{ record.name }}" required>
           </div>
         </div>
       </div>
@@ -41,7 +41,6 @@
             <select id="category" class="form-control" name="category" required>
               <option value="">選擇類別</option>
               {{#each categoryies}}
-
               <option value="{{this.category}}" {{#if_equal this.category this.tempCategory }} selected {{/if_equal}}>
                 {{this.categoryName}}
               </option>

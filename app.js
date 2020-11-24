@@ -39,33 +39,27 @@ const getIcon = require('./public/javascripts/iconType')
 // routes setting
 // 將 request 導入路由器
 app.get('/', (req, res) => {
-  //return res.send('expense-tracker')
   if (categoryData.length === 0) {
-    console.log('categoryData:', 0)
+    // 取出 category model 所有資料
     Category.find()
-      .lean()
-      .sort({ _id: 'asc' })
+      .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+      .sort({ _id: 'asc' })  // 排序(順)
       .then((categoryies) => {
         categoryData = categoryies
-        //res.render('index', { categoryies })
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error))  // 錯誤處理 
   }
 
-  // if (recordData.length === 0) {
-  console.log('recordData:', 0)
+  // 取出 Record model 所有資料
   return Record.find()
-    .lean()
-    .sort({ date: 'desc' })
+    .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .sort({ date: 'desc' })  // 排序(反)
     .then((records) => {
       recordData = records
+      // 將資料傳給 index 樣板
       return res.render('index', { records, categoryies: categoryData, totalAmount: totalCalc(records) })
     })
-    .catch((error) => console.log(error))
-  // }
-  // console.log('recordData:', 1)
-
-  // return res.render('index', { records: recordData, categoryies: categoryData, totalAmount: totalCalc(recordData) })
+    .catch((error) => console.log(error))  // 錯誤處理  
 })
 
 // 新增頁面
@@ -80,7 +74,7 @@ app.get('/expense', (req, res) => {
       .catch((error) => console.log(error))
   }
   //讀取new檔案、渲染畫面
-  res.render('new', { categoryies: categoryData })
+  return res.render('new', { categoryies: categoryData })
 })
 
 
@@ -91,39 +85,62 @@ app.post('/expense', (req, res) => {
   const options = req.body
   // 新增icon資料
   options.icon = getIcon(req.body.category)
+  console.log(options)
   // 字串替換
-  options.tempDate = options.date.replace(/-/g, '/')
+  options.showDate = options.date.replace(/-/g, '/')
+  console.log('date', req.body.date)
+  console.log('showDate', options.showDate)
   // 建立實例模型
   const recordAddNew = new Record(options)
   // 將實例存入資料庫
-  recordAddNew.save()
-    .then(() => res.redirect('/'))  //導向首頁router
-    .catch((error) => console.log(error))  //例外處理
+  return recordAddNew.save()
+    .then(() => res.redirect('/'))  // 導向首頁router
+    .catch((error) => console.log(error))  // 例外處理
 })
 
 // 修改頁面
 app.get('/expense/:id', (req, res) => {
+  // 取得_id
   const id = req.params.id
-  const test = 'food'
-  // categoryData.forEach((item) => {
-  //   item.tempCategory = test
-  // })
-  // console.log(categoryData)
+  // 從資料庫找出相關資料
   Record.findById(id)
-    .lean()
+    .lean()  // 把資料轉成javascript物件
     .then((record) => {
+      // 紀錄狀態
       categoryData.forEach((item) => {
         item.tempCategory = record.category
       })
-      console.log(categoryData)
-      res.render('edit', { record, categoryies: categoryData, test: test })
+
+      // 發送至前端樣板
+      res.render('edit', { record, categoryies: categoryData })
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error))  // 例外處理
+})
+
+// 確定修改
+app.put('/expense/:id', (req, res) => {
+  // 取得_id
+  const id = req.params.id
+  // 從 req.body 拿出表單裡的資料
+  const options = req.body
+  // 新增icon資料
+  options.icon = getIcon(req.body.category)
+  // 字串替換
+  options.showDate = options.date.replace(/-/g, '/')
+  // 從資料庫找出相關資料
+  return Record.findById(id)
+    .then((record) => {
+      //對應資料，寫入資料庫
+      record = Object.assign(record, options)
+      return record.save()
+    })
+    .then(() => res.redirect('/'))  // 導向首頁
+    .catch((error) => console.log(error))  // 例外處理
 })
 
 app.get('/:keyword', (req, res) => {
   const keyword = req.params.keyword
-  console.log(keyword)
+  //console.log(keyword)
   //console.log(categoryData)
 
   Record.find()

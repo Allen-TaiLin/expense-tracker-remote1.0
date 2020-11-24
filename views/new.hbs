@@ -41,14 +41,10 @@
             <select id="category" class="form-control" name="category" required>
               <option value="">選擇類別</option>
               {{#each categoryies}}
-              <option value="{{this.category}}">{{this.categoryName}}</option>
+              <option value="{{this.category}}">
+                {{this.categoryName}}
+              </option>
               {{/each}}
-
-
-              <option value="美式">美式</option>
-              <option value="日本料理">日本料理</option>
-              <option value="義式餐廳">義式餐廳</option>
-
             </select>
           </div>
         </div>
