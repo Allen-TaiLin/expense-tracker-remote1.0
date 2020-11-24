@@ -156,6 +156,17 @@ app.get('/:keyword', (req, res) => {
     .catch((error) => console.log(error))
 })
 
+// 確定刪除
+app.delete('/expense/:id', (req, res) => {
+  // 取得_id
+  const id = req.params.id
+  //從資料庫找出相關資料
+  return Record.findById(id)
+    .then((record) => record.remove())  // 刪除資料
+    .then(() => res.redirect('/'))  // 導向首頁
+    .catch((error) => console.log(error))  // 例外處理
+})
+
 
 
 // start and listen on the Express server
