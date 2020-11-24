@@ -15,7 +15,7 @@
       <div class="form-group">
         <div class="row d-flex justify-content-center">
           <div class="col-5 pr-5 d-flex justify-content-end">
-            <h3>消費名稱<span>*</span> : </h3>
+            <h3>消費名稱<span style="color: red;">*</span> : </h3>
           </div>
           <div class="col-5">
             <input type="text" class="form-control" name="name" value="{{ record.name }}" required>
@@ -25,7 +25,7 @@
       <div class="form-group">
         <div class="row d-flex justify-content-center">
           <div class="col-5 pr-5 d-flex justify-content-end">
-            <h3>消費日期<span>*</span> : </h3>
+            <h3>消費日期<span style="color: red;">*</span> : </h3>
           </div>
           <div class="col-5">
             <input type="date" class="form-control" name="date" value="{{ record.date }}" style="width:263px;" required>
@@ -35,7 +35,7 @@
       <div class="form-group">
         <div class="row d-flex justify-content-center">
           <div class="col-5 pr-5 d-flex justify-content-end">
-            <h3>消費類別<span>*</span> : </h3>
+            <h3>消費類別<span style="color: red;">*</span> : </h3>
           </div>
           <div class="col-5">
             <select id="category" class="form-control" name="category" required>
@@ -44,12 +44,7 @@
               <option value="{{this.category}}" {{#if_equal this.category this.tempCategory }} selected {{/if_equal}}>
                 {{this.categoryName}}
               </option>
-
               {{/each}}
-
-
-
-
             </select>
           </div>
         </div>
@@ -57,7 +52,7 @@
       <div class="form-group">
         <div class="row d-flex justify-content-center">
           <div class="col-5 pr-5 d-flex justify-content-end">
-            <h3>消費金額<span>*</span> : </h3>
+            <h3>消費金額<span style="color: red;">*</span> : </h3>
           </div>
           <div class="col-5">
             <input type="number" class="form-control" name="amount" value="{{ record.amount }}" min="0" required>
@@ -68,11 +63,8 @@
         <button type="submit" class="btn btn-warning text-white" style="width:263px; margin-right: 59px;">
           送出儲存
         </button>
-
       </div>
-
       {{!-- </div> --}}
     </form>
   </div>
-
 </div>
