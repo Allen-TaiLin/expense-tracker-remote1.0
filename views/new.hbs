@@ -1,0 +1,77 @@
+<div class="container" style="width: 800px;">
+  <div class="p-5">
+    <form action="/expense" method="POST">
+      <div class="form-group mt-3">
+        <div class="row d-flex justify-content-center">
+          <div class="col-5 pr-5 d-flex justify-content-end">
+            <h3><span>*</span>必填欄位</h3>
+          </div>
+          <div class="col-5">
+            <h3>請輸入你的支出</h3>
+          </div>
+        </div>
+      </div>
+      {{!-- <div class="create-form"> --}}
+      <div class="form-group">
+        <div class="row d-flex justify-content-center">
+          <div class="col-5 pr-5 d-flex justify-content-end">
+            <h3>消費名稱<span>*</span> : </h3>
+          </div>
+          <div class="col-5">
+            <input type="text" class="form-control" name="name" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row d-flex justify-content-center">
+          <div class="col-5 pr-5 d-flex justify-content-end">
+            <h3>消費日期<span>*</span> : </h3>
+          </div>
+          <div class="col-5">
+            <input type="date" class="form-control" name="date" style="width:263px;" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row d-flex justify-content-center">
+          <div class="col-5 pr-5 d-flex justify-content-end">
+            <h3>消費類別<span>*</span> : </h3>
+          </div>
+          <div class="col-5">
+            <select id="category" class="form-control" name="category" required>
+              <option value="">選擇類別</option>
+              {{#each categoryies}}
+              <option value="{{this.category}}">{{this.categoryName}}</option>
+              {{/each}}
+
+
+              <option value="美式">美式</option>
+              <option value="日本料理">日本料理</option>
+              <option value="義式餐廳">義式餐廳</option>
+
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row d-flex justify-content-center">
+          <div class="col-5 pr-5 d-flex justify-content-end">
+            <h3>消費金額<span>*</span> : </h3>
+          </div>
+          <div class="col-5">
+            <input type="number" class="form-control" name="amount" min="0" required>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-warning text-white" style="width:263px; margin-right: 59px;">
+          新增支出
+        </button>
+
+      </div>
+
+      {{!-- </div> --}}
+    </form>
+  </div>
+
+</div>

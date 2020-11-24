@@ -20,9 +20,9 @@ const categorySchema = new SChema({
     type: String,
     required: true
   },
-  orderByID: {
-    type: Number,
-    required: true
+  tempCategory: {
+    type: String,
+    required: false
   }
 })
 
