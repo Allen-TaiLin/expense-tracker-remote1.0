@@ -44,7 +44,7 @@ git clone https://github.com/Allen-TaiLin/expense-tracker-remote1.0.git
 2. 開啟終端機(Terminal) 或 (Git Bash)，進入到存放此專案的資料夾
 
 ```
-cd restaurant_list_refactor
+cd expense-tracker
 ```
 
 3. 安裝 npm 套件
