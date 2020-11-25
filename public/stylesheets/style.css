@@ -1,6 +1,11 @@
 .fas {
   color: #7995E0;
 }
+
 li:hover {
   background-color: #DDE7E8;
+}
+
+nav {
+  border-bottom: 3px solid #7995E0;
 }

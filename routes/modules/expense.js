@@ -12,15 +12,16 @@ let categoryData = []
 
 // 新增頁面
 router.get('/new', (req, res) => {
+  // 取得下拉式選單資料
   Category.find()
-    .lean()
-    .sort({ _id: 'asc' })
+    .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .sort({ _id: 'asc' })  // 排序(順)
     .then((categoryies) => {
       categoryData = categoryies
       //讀取new檔案、渲染畫面
       return res.render('new', { categoryies: categoryData })
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error))  // 例外處理
 })
 
 
@@ -45,19 +46,29 @@ router.post('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // 取得_id
   const id = req.params.id
-  // 從資料庫找出相關資料
-  Record.findById(id)
-    .lean()  // 把資料轉成javascript物件
-    .then((record) => {
-      // 紀錄狀態
-      categoryData.forEach((item) => {
-        item.tempCategory = record.category
-      })
-
-      // 發送至前端樣板
-      res.render('edit', { record, categoryies: categoryData })
+  // 取得下拉式選單資料
+  Category.find()
+    .lean()
+    .sort({ _id: 'asc' })  // 排序(順)
+    .then((categoryies) => {
+      categoryData = categoryies
     })
-    .catch((error) => console.log(error))  // 例外處理
+    .then(() => {
+      // 從資料庫找出相關資料
+      return Record.findById(id)
+        .lean()  // 把資料轉成javascript物件
+        .then((record) => {
+          // 紀錄狀態
+          categoryData.forEach((item) => {
+            item.tempCategory = record.category
+          })
+
+          // 發送至前端樣板
+          return res.render('edit', { record, categoryies: categoryData })
+        })
+        .catch((error) => console.log(error))  // 例外處理
+    })
+    .catch((error) => console.log(error))  // 例外處理  
 })
 
 
