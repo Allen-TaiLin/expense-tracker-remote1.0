@@ -6,6 +6,8 @@ const handlebars = require('handlebars')
 const methodOverride = require('method-override')
 const app = express()
 const routes = require('./routes/index')
+const session = require('express-session')
+
 const port = process.env.PORT || 3000
 
 // setting template engine
@@ -28,6 +30,13 @@ handlebars.registerHelper('if_equal', function (job, expectedJob, options) {
   }
   return options.inverse(this);
 })
+
+// Session設定
+app.use(session({
+  secret: 'ExpenseSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 
 // routes setting
