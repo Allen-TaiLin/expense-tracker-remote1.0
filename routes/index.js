@@ -10,13 +10,16 @@ const expense = require('./modules/expense')
 // 引入 users 模組程式碼
 const users = require('./modules/users')
 
+// 掛載 middleware
+const { authenticator } = require('../middleware/auth')
 
+// 加入驗證程序
 // 將網址結構符合 /express 字串的 request 導向 express 模組
-router.use('/expense', expense)
+router.use('/expense', authenticator, expense)
 // 將網址結構符合 / 字串的 users 導向 home 模組
 router.use('/users', users)
 // 將網址結構符合 / 字串的 request 導向 home 模組
-router.use('/', home)
+router.use('/', authenticator, home)
 
 // 匯出路由器
 module.exports = router
