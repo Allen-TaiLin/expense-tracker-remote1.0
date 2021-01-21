@@ -1,15 +1,22 @@
+// 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
+// 引用 passport
+const passport = require('passport')
 const User = require('../../models/user')
 
+// 登入頁面
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', (req, res) => {
+// 加入 middleware，驗證 request 登入狀態
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
-})
-
+// 註冊頁面
 router.get('/register', (req, res) => {
   res.render('register')
 })
@@ -45,8 +52,10 @@ router.post('/register', (req, res) => {
     }).catch((error) => console.log(error))
 })
 
+// 登出
 router.get('/logout', (req, res) => {
-
+  req.logOut()
+  res.redirect('/login')
 })
 
 module.exports = router
