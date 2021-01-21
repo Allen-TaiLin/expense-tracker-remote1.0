@@ -22,16 +22,33 @@
         <div class="col-6">
           <a class="navbar-brand" href="/" style="color:white;">
             <i class="fab fa-studiovinari" style="font-size: 1.8rem;"></i>
+            {{#if isAuthenticated}} {{user.name}} 的 {{/if}}
             家庭記帳本
           </a>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center d-inline-block">
+          {{#if isAuthenticated}}
           <a class="navbar-brand" href="/" style="text-center; text-decoration:none;">
             <button class="btn btn-secondary">
-              <i class="fas fa-sign-out-alt" style="font-size: 1.5rem; color:white;"></i>
+              <i class="fas fa-backward" style="font-size: 1.5rem; color:white;"></i>
               返回
             </button>
           </a>
+
+          <a class="navbar-brand" href="/users/logout" style="text-center; text-decoration:none;">
+            <button class="btn btn-secondary">
+              <i class="fas fa-sign-out-alt" style="font-size: 1.5rem; color:white;"></i>
+              登出
+            </button>
+          </a>
+          {{else}}
+          <a class="navbar-brand" href="/users/login" style="text-center; text-decoration:none;">
+            <button class="btn btn-secondary">
+              <i class="fas fa-sign-in-alt" style="font-size: 1.5rem; color:white;"></i>
+              登入
+            </button>
+          </a>
+          {{/if}}
         </div>
       </div>
     </div>
