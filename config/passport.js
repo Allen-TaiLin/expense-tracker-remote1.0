@@ -2,6 +2,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 module.exports = (app) => {
   // 初始化 Passport 模組
@@ -15,14 +16,17 @@ module.exports = (app) => {
           req.flash('warning_msg', '此信箱尚未註冊!')
           return done(null, false, { message: '此信箱尚未註冊!' })
         }
-        if (user.password !== password) {
-          req.flash('warning_msg', '信箱或密碼錯誤!')
-          return done(null, false, { message: '信箱或密碼錯誤!' })
-        }
-        return done(null, user)
+
+        return bcrypt.compare(password, user.password)
+          .then((isMatch) => {
+            if (!isMatch) {
+              req.flash('warning_msg', '信箱或密碼錯誤!')
+              return done(null, false, { message: '信箱或密碼錯誤!' })
+            }
+            return done(null, user)
+          })
       })
-      .catch((error) => done(error, false)
-      )
+      .catch((error) => done(error, false))
   }))
 
   // 設定序列化與反序列化
