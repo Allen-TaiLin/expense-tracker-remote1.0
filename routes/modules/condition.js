@@ -12,9 +12,10 @@ require('../../public/javascripts/groupBy')
 router.get('/', async (req, res) => {
 
   try {
+    const userId = req.user._id
     const categoryies = await Category.find().lean().sort({ _id: 'asc' })  // 排序(順)
 
-    const userRecords = await Record.find().lean().sort({ date: 'desc' })  // 排序(反)
+    const userRecords = await Record.find({ userId }).lean().sort({ date: 'desc' })  // 排序(反)
 
     // 設定日期選單
     const DateGroup = userRecords.groupBy('date')
@@ -24,9 +25,11 @@ router.get('/', async (req, res) => {
     const selectDate = req.query.date
 
     // 設定 selected 目標
-    DateGroup.forEach((item) => {
-      item.selectedValue = selectDate
-    })
+    if (DateGroup.length > 0) {
+      DateGroup.forEach((item) => {
+        item.selectedValue = selectDate
+      })
+    }
 
     categoryies.forEach((item) => {
       item.tempCategory = category

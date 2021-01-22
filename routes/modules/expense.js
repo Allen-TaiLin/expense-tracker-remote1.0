@@ -27,12 +27,15 @@ router.get('/new', (req, res) => {
 
 // 確認新增
 router.post('/', (req, res) => {
+  const userId = req.user._id
   // 從 req.body 拿出表單裡的資料
   const options = req.body
   // 新增icon資料
   options.icon = getIcon(req.body.category)
   // 字串替換
   options.showDate = options.date.replace(/-/g, '/')
+  // 新增userId資料
+  options.userId = userId
   // 建立實例模型
   const recordAddNew = new Record(options)
   // 將實例存入資料庫
@@ -44,8 +47,9 @@ router.post('/', (req, res) => {
 
 // 修改頁面
 router.get('/:id', (req, res) => {
+  const userId = req.user._id
   // 取得_id
-  const id = req.params.id
+  const _id = req.params.id
   // 取得下拉式選單資料
   Category.find()
     .lean()
@@ -55,7 +59,7 @@ router.get('/:id', (req, res) => {
     })
     .then(() => {
       // 從資料庫找出相關資料
-      return Record.findById(id)
+      return Record.findOne({ _id, userId })
         .lean()  // 把資料轉成javascript物件
         .then((record) => {
           // 紀錄狀態
@@ -74,16 +78,19 @@ router.get('/:id', (req, res) => {
 
 // 確定修改
 router.put('/:id', (req, res) => {
+  const userId = req.user._id
   // 取得_id
-  const id = req.params.id
+  const _id = req.params.id
   // 從 req.body 拿出表單裡的資料
   const options = req.body
   // 新增icon資料
   options.icon = getIcon(req.body.category)
   // 字串替換
   options.showDate = options.date.replace(/-/g, '/')
+  // 新增userId資料
+  options.userId = userId
   // 從資料庫找出相關資料
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     .then((record) => {
       //對應資料，寫入資料庫
       record = Object.assign(record, options)
@@ -96,10 +103,11 @@ router.put('/:id', (req, res) => {
 
 // 確定刪除
 router.delete('/:id', (req, res) => {
+  const userId = req.user._id
   // 取得_id
-  const id = req.params.id
+  const _id = req.params.id
   //從資料庫找出相關資料
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     .then((record) => record.remove())  // 刪除資料
     .then(() => res.redirect('/'))  // 導向首頁
     .catch((error) => console.log(error))  // 例外處理

@@ -16,6 +16,7 @@ let selectCategory = ''
 
 // 定義首頁路由
 router.get('/', (req, res) => {
+  const userId = req.user._id
   // 取出 category model 所有資料
   Category.find()
     .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
@@ -25,12 +26,13 @@ router.get('/', (req, res) => {
     })
     .then(() => {
       // 取出 Record model 所有資料
-      return Record.find()
+      return Record.find({ userId })
         .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
         .sort({ date: 'desc' })  // 排序(反)
         .then((records) => {
+          // 設定日期選單
           DateGroup = records.groupBy('date')
-          console.log(DateGroup)
+          //console.log(DateGroup)
 
           // 將資料傳給 index 樣板
           return res.render('index', { records, categoryies: categoryData, DateGroup, totalAmount: totalCalc(records) })
