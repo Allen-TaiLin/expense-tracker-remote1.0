@@ -14,7 +14,7 @@ const categorySchema = new SChema({
   },
   url: {
     type: String,
-    required: true
+    required: false
   },
   icon: {
     type: String,

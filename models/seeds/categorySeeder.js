@@ -1,4 +1,7 @@
 // 載入套件
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const db = require('../../config/mongoose')
 // 載入 Category model
 const Category = require('../category')

@@ -5,7 +5,8 @@
     "category": "food",
     "icon": "<i class='fas fa-utensils'></i>",
     "amount": 60,
-    "showDate": "2019/04/23"
+    "showDate": "2019/04/23",
+    "merchant": "正忠排骨"
   },
   {
     "name": "晚餐",
@@ -13,7 +14,8 @@
     "category": "food",
     "icon": "<i class='fas fa-utensils'></i>",
     "amount": 60,
-    "showDate": "2019/04/23"
+    "showDate": "2019/04/23",
+    "merchant": "台灣第一家"
   },
   {
     "name": "捷運",
@@ -21,7 +23,8 @@
     "category": "transport",
     "icon": "<i class='fas fa-shuttle-van'></i>",
     "amount": 120,
-    "showDate": "2019/04/23"
+    "showDate": "2019/04/23",
+    "merchant": "高捷"
   },
   {
     "name": "電影：驚奇隊長",
@@ -29,7 +32,8 @@
     "category": "entertainment",
     "icon": "<i class='fas fa-grin-beam'></i>",
     "amount": 220,
-    "showDate": "2019/04/23"
+    "showDate": "2019/04/23",
+    "merchant": "環球影城"
   },
   {
     "name": "租金",
@@ -37,6 +41,52 @@
     "category": "homeExpense",
     "icon": "<i class='fas fa-home'></i>",
     "amount": 25000,
-    "showDate": "2019/04/01"
+    "showDate": "2019/04/01",
+    "merchant": "漢神巨蛋"
+  },
+  {
+    "name": "購買滑鼠",
+    "date": "2020-11-23",
+    "category": "other",
+    "icon": "<i class='fas fa-pen'></i>",
+    "amount": 330,
+    "showDate": "2020/11/23",
+    "merchant": "順發3C"
+  },
+  {
+    "name": "汽車保養",
+    "date": "2020-11-10",
+    "category": "other",
+    "icon": "<i class='fas fa-pen'></i>",
+    "amount": 2000,
+    "showDate": "2020/11/10",
+    "merchant": "正興"
+  },
+  {
+    "name": "果汁",
+    "date": "2021-01-22",
+    "category": "food",
+    "icon": "<i class='fas fa-utensils'></i>",
+    "amount": 60,
+    "showDate": "2021/01/22",
+    "merchant": "50嵐"
+  },
+  {
+    "name": "吸塵器",
+    "date": "2020-11-30",
+    "category": "homeExpense",
+    "icon": "<i class='fas fa-home'></i>",
+    "amount": 2000,
+    "showDate": "2020/11/30",
+    "merchant": "全國電子"
+  },
+  {
+    "name": "KTV",
+    "date": "2020-11-25",
+    "category": "entertainment",
+    "icon": "<i class='fas fa-grin-beam'></i>",
+    "amount": 500,
+    "showDate": "2020/11/25",
+    "merchant": "錢櫃"
   }
 ]

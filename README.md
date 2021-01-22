@@ -1,7 +1,8 @@
-# 老爸的私房錢 - expense-tracker
+# 老爸的私房錢(升級) - expense-tracker
 
 打造一個簡單的網路記帳工具。核心功能是讓使用者新增、修改與刪除「支出紀錄」，提供下拉分類選單。
-![](/2_3A12_expense-tracker.png)
+![](/3_A3_1.png)
+![](/3_A3_2.png)
 
 ## Features - 產品功能
 
@@ -12,6 +13,9 @@
 - 使用者可以編輯支出的所有屬性 (一次只能編輯一筆)
 - 使用者可以刪除任何一筆支出 (一次只能刪除一筆)
 - 總金額的計算只會包括被篩選出來的支出總和
+- 加入使用者認證功能
+- 新增商家欄位供紀錄
+- 新增「月份」篩選支出項目
 
 ## Environment SetUp - 環境建置
 
@@ -24,6 +28,12 @@
 7. [MongoDB](https://www.mongodb.com/) (版本使用 4.2.11) - 資料庫
 8. [Mongoose](https://www.npmjs.com/package/mongoose) (版本使用 5.10.15) - MongoDB 的 ODM 可以在程式中與資料庫溝通
 9. [Method-Override](https://www.npmjs.com/package/method-override) (版本使用 3.0.0) - Express 的 middleware「中介軟體」
+10. [Express-Session](https://www.npmjs.com/package/express-session) (版本使用 1.17.1) - Express的「儲存認證結果」
+11. [Passport](https://www.npmjs.com/package/passport) (版本使用 0.4.1) - Passport.js 是專門用於「使用者認證」
+12. [Passport-Facebook](https://www.npmjs.com/package/passport-facebook) (版本使用 3.0.0) - 運用 Passport 的 Facebook Strategy 進行第三方登入。
+13. [Connect-Flash](https://www.npmjs.com/package/connect-flash) (版本使用 0.1.1) - 提示訊息
+14. [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) (版本使用 2.4.3) -  Bcrypt.js 是專門用於「雜湊使用者的註冊密碼」
+15. [dotenv](https://www.npmjs.com/package/dotenv) (版本使用 8.2.0) -  隱藏重要資訊
 
 ## Use Tools - 使用工具
 
@@ -76,6 +86,20 @@ npm run dev
 ```
 Express is listening on http://localhost:3000
 mongodb connected!
+```
+8. 測試帳號
+
+```
+  {
+    name: 'Tony',
+    email: 'user1@example.com',
+    password: '12345678'
+  },
+  {
+    name: 'Stark',
+    email: 'user2@example.com',
+    password: '12345678'
+  }
 ```
 
 
