@@ -9,6 +9,7 @@ const routes = require('./routes/index')
 const session = require('express-session')
 // 載入設定檔，要寫在 express-session 以後
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 
 const port = process.env.PORT || 3000
 
@@ -42,15 +43,15 @@ app.use(session({
 
 // 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
 usePassport(app)
+// flash 套件
+app.use(flash())
 
 // 設定本地變數 res.locals
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
-  // res.locals.selectCategory = req.query.category
-  //console.log('app', res.locals.selectCategory)
-  //res.locals.selectDate = req.query.date
-  // console.log('app2', res.locals.selectDate)
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 

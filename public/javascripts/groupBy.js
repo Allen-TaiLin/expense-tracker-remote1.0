@@ -18,7 +18,6 @@ module.exports = Array.prototype.groupBy = function (prop) {
       return dateTemp
     })
 
-    console.log(result)
     //console.log('1:', val)    
     //groups[val] = groups[val] || []
     //groups[val].push(item)
