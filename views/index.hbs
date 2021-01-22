@@ -1,25 +1,38 @@
 <div class="container" style="width: 800px;">
   <div class="row mt-3">
-    <div class="col">
-      <!-- Dropdowns -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" style="width: 200px;">
-          類別
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {{#each categoryies}}
-          <a class="dropdown-item" href="{{ this.url }}">
-            {{ this.categoryName }}
-          </a>
-          {{/each}}
-          <a class="dropdown-item" href="/">
-            不分類別
-          </a>
+    <div class="col d-flex">
+      <form name="form" action="/condition" method="get" style="width: 350px; height:50px;">
+        <!-- Dropdowns dateGroup-->
+        <div class="d-inline m-0">
+          {{!-- <label class="mr-sm-2" for="inlineFormCustomSelect">月份</label> --}}
+          <select class="custom-select mr-sm-2 bg-secondary text-white" id="inlineFormCustomSelect" name="date"
+            onchange="submit()" style="width: 160px;">
+            <option value="">全部月份</option>
+            {{#each DateGroup}}
+            <option value="{{ this.dateGroup }}" {{#if_equal this.selectedValue this.dateGroup}} selected {{/if_equal}}>
+              {{ this.dateGroup }}
+            </option>
+            {{/each}}
+          </select>
         </div>
-      </div>
+
+        <!-- Dropdowns category-->
+        <div class="d-inline m-0">
+          {{!-- <label class="mr-sm-2" for="inlineFormCustomSelect">支出類別</label> --}}
+          <select class="custom-select mr-sm-2 bg-secondary text-white" id="inlineFormCustomSelect" name="category"
+            onchange="submit()" style="width: 160px; display:inline-block;">
+            <option value="">不分類別</option>
+            {{#each categoryies}}
+            <option value="{{ this.category }}" {{#if_equal this.tempCategory this.category}} selected {{/if_equal}}>
+              {{ this.categoryName }}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+      </form>
+      <!-- Dropdowns end-->
     </div>
-    <div class="col">
+    <div class="col p-0">
       <h3>總金額：</h3>
     </div>
     <div class="col d-flex justify-content-center">

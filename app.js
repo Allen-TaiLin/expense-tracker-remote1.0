@@ -47,6 +47,10 @@ usePassport(app)
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  // res.locals.selectCategory = req.query.category
+  //console.log('app', res.locals.selectCategory)
+  //res.locals.selectDate = req.query.date
+  // console.log('app2', res.locals.selectDate)
   next()
 })
 
