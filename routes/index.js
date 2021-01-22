@@ -11,17 +11,21 @@ const expense = require('./modules/expense')
 const condition = require('./modules/condition')
 // 引入 users 模組程式碼
 const users = require('./modules/users')
+// 引入 auth 模組程式碼
+const auth = require('./modules/auth')
 
 // 掛載 middleware
 const { authenticator } = require('../middleware/auth')
 
 // 加入驗證程序
-// 將網址結構符合 /express 字串的 request 導向 express 模組
+// 將網址結構符合 /expense 字串的 request 導向 expense 模組
 router.use('/expense', authenticator, expense)
-// 將網址結構符合 /condition 字串的 request 導向 express 模組
+// 將網址結構符合 /condition 字串的 request 導向 condition 模組
 router.use('/condition', authenticator, condition)
-// 將網址結構符合 / 字串的 users 導向 home 模組
+// 將網址結構符合 /users 字串的 request 導向 users 模組
 router.use('/users', users)
+// 將網址結構符合 /auth 字串的 request 導向 auth 模組
+router.use('/auth', auth)
 // 將網址結構符合 / 字串的 request 導向 home 模組
 router.use('/', authenticator, home)
 
